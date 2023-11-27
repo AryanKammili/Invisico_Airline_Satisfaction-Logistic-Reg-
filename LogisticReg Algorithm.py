@@ -9,6 +9,13 @@ data = pd.read_csv("Invistico_Airline.csv")
 
 data = data[["satisfaction", "Customer Type", "Age", "Class", "Seat comfort"]]
 
+# Will be used later #
+actualSatisfaction = ""
+predictedSatisfaction = ""
+
+# Tracker for inaccuracy #
+timesWrong = 0
+
 # This allows us to not have to change our response variable every single time #
 # A response variable is pretty much a variable that responds to input, so our output #
 predict = "satisfaction"
@@ -44,16 +51,13 @@ y = regression.predict(x_test)
 
 predictions = regression.predict(x_test)
 
-actualSatisfaction = ""
-predictedSatisfaction = ""
-
-timesWrong = 0
-
+# Removes Convergence Warning from console #
 with warnings.catch_warnings():
     warnings.simplefilter("ignore", category=ConvergenceWarning)
 
 for i in range(len(predictions)):
 
+    # Only prints out first 5 so too much of the console is not taken up #
     if i > 5:
         continue
     else:
